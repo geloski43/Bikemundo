@@ -45,6 +45,14 @@ const History = () => {
     let isMounted = true;
     if (isMounted) {
       loadUsersOrders();
+    }
+    return () => { isMounted = false };
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
       loadUsersCart();
     }
     return () => { isMounted = false };

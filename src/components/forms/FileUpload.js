@@ -4,6 +4,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
 
+// const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+// const url = 'https://guarded-everglades-60016.herokuapp.com/api/uploadimages/';
+
 const FileUpload = ({ values, setValues, setLoading }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
