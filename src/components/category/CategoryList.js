@@ -14,8 +14,6 @@ const CategoryList = () => {
     })
       .catch((err) => console.log(err));
     return () => { isMounted = false };
-
-    // eslint-disable-next-line
   }, []);
 
   const showCategories = () =>
