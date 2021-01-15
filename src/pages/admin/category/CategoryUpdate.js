@@ -13,7 +13,6 @@ const CategoryUpdate = ({ history, match }) => {
 
   useEffect(() => {
     loadCategory();
-    // eslint-disable-next-line
   }, []);
 
   const loadCategory = () =>
@@ -21,11 +20,9 @@ const CategoryUpdate = ({ history, match }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name);
     setLoading(true);
     updateCategory(match.params.slug, { name }, user.token)
       .then((res) => {
-        // console.log(res)
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is updated`);

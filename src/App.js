@@ -9,37 +9,7 @@ import { currentUser } from "./functions/auth";
 import { LoadingOutlined } from "@ant-design/icons";
 import bikemundo from './images/bikemundo.jpg'
 
-// import Login from "./pages/auth/Login";
-// import Register from "./pages/auth/Register";
-// import Home from "./pages/Home";
-// import Header from "./components/nav/Header";
-// import SideDrawer from "./components/drawer/SideDrawer";
 
-// import RegisterComplete from "./pages/auth/RegisterComplete";
-// import ForgotPassword from "./pages/auth/ForgotPassword";
-// import History from "./pages/user/History";
-// import UserRoute from "./components/routes/UserRoute";
-// import AdminRoute from "./components/routes/AdminRoute";
-// import Password from "./pages/user/Password";
-// import Wishlist from "./pages/user/Wishlist";
-// import AdminDashboard from "./pages/admin/AdminDashboard";
-// import CategoryCreate from "./pages/admin/category/CategoryCreate";
-// import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
-// import SubCreate from "./pages/admin/sub/SubCreate";
-// import SubUpdate from "./pages/admin/sub/SubUpdate";
-// import ProductCreate from "./pages/admin/product/ProductCreate";
-// import AllProducts from "./pages/admin/product/AllProducts";
-// import ProductUpdate from "./pages/admin/product/ProductUpdate";
-// import Product from "./pages/Product";
-// import CategoryHome from "./pages/category/CategoryHome";
-// import SubHome from "./pages/sub/SubHome";
-// import Shop from "./pages/Shop";
-// import Cart from "./pages/Cart";
-// import Checkout from "./pages/Checkout";
-// import CreateCouponPage from "./pages/admin/coupon/CreateCouponPage";
-// import Payment from "./pages/Payment";
-
-// using lazy
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const Home = lazy(() => import("./pages/Home"));
@@ -80,16 +50,12 @@ const oneSpace = '\xa0\xa0\xa0';
 const App = () => {
   const dispatch = useDispatch();
 
-  // to check firebase auth state
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
         console.log("user in app.js", user);
-        // console.log(user.providerData[0].providerId)
-        // if (user.providerData.length === 2) {
-        //   toast.warning("Please set your password on your first log in")
-        // }
         currentUser(idTokenResult.token)
           .then((res) => {
             dispatch({
@@ -106,7 +72,6 @@ const App = () => {
           .catch((err) => console.log(err));
       }
     });
-    // cleanup
     return () => unsubscribe();
   }, [dispatch]);
 

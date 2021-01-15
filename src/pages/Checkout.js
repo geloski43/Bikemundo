@@ -18,7 +18,7 @@ const Checkout = ({ history }) => {
 
   const [infoSaved, setInfoSaved] = useState(false);
   const [coupon, setCoupon] = useState("");
-  // discount price
+
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
   const [discountError, setDiscountError] = useState("");
 
@@ -32,7 +32,7 @@ const Checkout = ({ history }) => {
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     });
-    // eslint-disable-next-line
+
   }, []);
 
   useEffect(() => {
@@ -48,16 +48,16 @@ const Checkout = ({ history }) => {
   }, [user.shipping, user]);
 
   const emptyCart = () => {
-    // remove from local storage
+
     if (typeof window !== "undefined") {
       localStorage.removeItem("cart");
     }
-    // remove from redux
+
     dispatch({
       type: "ADD_TO_CART",
       payload: [],
     });
-    // remove from backend
+
     emptyUserCart(user.token).then((res) => {
       setProducts([]);
       setTotal(0);
@@ -69,7 +69,7 @@ const Checkout = ({ history }) => {
 
   const saveInfoToDb = (e) => {
     e.preventDefault();
-    // console.log(address);
+
     saveUserInfo(user.token, address, username, phonenumber).then((res) => {
       if (res.data) {
         setInfoSaved(true);
@@ -85,16 +85,16 @@ const Checkout = ({ history }) => {
       console.log("RES ON COUPON APPLIED", res.data);
       if (res.data) {
         setTotalAfterDiscount(res.data);
-        // update redux coupon applied true/false
+
         dispatch({
           type: "COUPON_APPLIED",
           payload: true,
         });
       }
-      // error
+
       if (res.data.err) {
         setDiscountError(res.data.err);
-        // update redux coupon applied true/false
+
         dispatch({
           type: "COUPON_APPLIED",
           payload: false,
@@ -173,28 +173,28 @@ const Checkout = ({ history }) => {
   const createCashOrder = () => {
     createCashOrderForUser(user.token, COD, couponTrueOrFalse).then((res) => {
       console.log("USER CASH ORDER CREATED RES ", res);
-      // empty cart form redux, local Storage, reset coupon, reset COD, redirect
+
       if (res.data.ok) {
-        // empty local storage
+
         if (typeof window !== "undefined") localStorage.removeItem("cart");
-        // empty redux cart
+
         dispatch({
           type: "ADD_TO_CART",
           payload: [],
         });
-        // empty redux coupon
+
         dispatch({
           type: "COUPON_APPLIED",
           payload: false,
         });
-        // empty redux COD
+
         dispatch({
           type: "COD",
           payload: false,
         });
-        // mepty cart from backend
+
         emptyUserCart(user.token);
-        // redirect
+
         setTimeout(() => {
           history.push("/user/history");
         }, 1000);

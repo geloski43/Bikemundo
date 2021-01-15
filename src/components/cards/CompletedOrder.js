@@ -8,10 +8,8 @@ import {
 
 const CompletedOrder = ({ handleRemoveOrder, onReject, orders, showStatus = true }) => {
 
-  //get the oldest date ordered
   const oldestOrder = orders.map(function (e) { return e.createdAt; }).sort()[0]
 
-  //oldest order and completed status
   const completedOrder = orders.find(
     orderCompleted => orderCompleted.createdAt === oldestOrder && orderCompleted.orderStatus === "Completed"
   );

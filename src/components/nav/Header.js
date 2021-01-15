@@ -27,7 +27,7 @@ const Header = () => {
   let { user, cart } = useSelector((state) => ({ ...state }));
   const oneSpace = '\xa0';
 
-  //set admin emails
+
 
   const adminEmails = [
     {
@@ -51,21 +51,19 @@ const Header = () => {
         "onath.gonzales@gmail.com ",
     },
   ];
-  //find existing admin email
+
   const existingAdminEmail = adminEmails.find(
     conFirmedEmail => (
       user && conFirmedEmail.email === user.email
     )
   );
 
-  // console.log(adminEmails)
-  // console.log(existingAdminEmail)
-  // console.log("user in header", user)
+
 
   let history = useHistory();
 
   const handleClick = (e) => {
-    // console.log(e.key);
+
     setCurrent(e.key);
   };
 
@@ -74,19 +72,19 @@ const Header = () => {
   };
 
   const logoutSaveAndEmptyCart = () => {
-    // save cart
+
     userCart(cart, user.token)
       .then((res) => {
         console.log("CART POST RES", res);
       })
       .catch((err) => console.log("cart save err", err));
-    //log out
+
     firebase.auth().signOut();
     dispatch({
       type: "LOGOUT",
       payload: null,
     });
-    // empty cart in redux and local storage
+
     dispatch({
       type: "ADD_TO_CART",
       payload: [],
@@ -95,13 +93,13 @@ const Header = () => {
     history.push("/login");
   };
 
-  // avatar initial when no image is available
+
   const getInitials = (string) => {
     const names = string.split(' '),
       initials = names[0].substring(0, 1).toUpperCase();
 
     if (names.length > 1) {
-      // eslint-disable-next-line
+
       initials += names[names.length - 1].substring(0, 1).toUpperCase();
     }
     return initials;

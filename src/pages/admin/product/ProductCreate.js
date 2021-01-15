@@ -32,7 +32,7 @@ const ProductCreate = () => {
   const [showSub, setShowSub] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // redux
+
   const { user } = useSelector((state) => ({ ...state }));
 
   let history = useHistory();
@@ -40,7 +40,7 @@ const ProductCreate = () => {
 
   useEffect(() => {
     loadCategories();
-    // eslint-disable-next-line
+
   }, []);
 
   const loadCategories = () => {
@@ -71,14 +71,14 @@ const ProductCreate = () => {
       })
       .catch((err) => {
         console.log(err);
-        // if (err.response.status === 400) toast.error(err.response.data);
+
         toast.error(err.response.data.err);
       });
   };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    // console.log(e.target.name, " ----- ", e.target.value);
+
   };
 
   const handleCatagoryChange = (e) => {
@@ -108,7 +108,6 @@ const ProductCreate = () => {
             )}
           <hr />
 
-          {/* {JSON.stringify(values.images)} */}
 
           <div className="p-3">
             <FileUpload

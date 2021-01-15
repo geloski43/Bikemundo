@@ -17,7 +17,7 @@ const SubUpdate = ({ match, history }) => {
   useEffect(() => {
     loadCategories();
     loadSub();
-    // eslint-disable-next-line
+
   }, []);
 
   const loadCategories = () =>
@@ -31,11 +31,11 @@ const SubUpdate = ({ match, history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name);
+
     setLoading(true);
     updateSub(match.params.slug, { name, parent }, user.token)
       .then((res) => {
-        // console.log(res)
+
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is updated`);

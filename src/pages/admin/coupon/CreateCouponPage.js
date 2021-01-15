@@ -18,7 +18,7 @@ const CreateCouponPage = () => {
   const [loading, setLoading] = useState("");
   const [coupons, setCoupons] = useState([]);
 
-  // redux
+
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
@@ -30,11 +30,11 @@ const CreateCouponPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    // console.table(name, expiry, discount);
+
     createCoupon({ name, expiry, discount }, user.token)
       .then((res) => {
         setLoading(false);
-        loadAllCoupons(); // load all coupons
+        loadAllCoupons();
         setName("");
         setDiscount("");
         setExpiry("");
@@ -48,7 +48,7 @@ const CreateCouponPage = () => {
       setLoading(true);
       removeCoupon(couponId, user.token)
         .then((res) => {
-          loadAllCoupons(); // load all coupons
+          loadAllCoupons();
           setLoading(false);
           toast.error(`Coupon "${res.data.name}" deleted`);
         })

@@ -7,7 +7,7 @@ import Orders from "../../components/order/Orders";
 
 const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
-  // eslint-disable-next-line
+
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
@@ -17,7 +17,7 @@ const AdminDashboard = () => {
     if (isMounted)
       loadOrders();
     return () => { isMounted = false }
-    // eslint-disable-next-line
+
   }, []);
 
   const loadOrders = () =>
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
           <h6>
             {orders.length > 0 ? "Orders for Processing" : "No orders to be Processed"}
           </h6>
-          {/* {JSON.stringify(orders)} */}
+
           {loading ? <h4 className="text-center">Loading...</h4>
             : <Orders orders={orders} handleStatusChange={handleStatusChange}
             />}

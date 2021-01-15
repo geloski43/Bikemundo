@@ -8,18 +8,17 @@ const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const { user } = useSelector((state) => ({ ...state }));
+
   let dispatch = useDispatch();
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
-    // console.log(window.location.href);
-    // console.log(window.localStorage.getItem("emailForRegistration"));
+
   }, [history]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // validation
+
     if (!email || !password) {
       toast.error("Email and password is required");
       return;
@@ -37,13 +36,13 @@ const RegisterComplete = ({ history }) => {
       );
       console.log("RESULT", result);
       if (result.user.emailVerified) {
-        // remove user email fom local storage
+
         window.localStorage.removeItem("emailForRegistration");
-        // get user id token
+
         let user = auth.currentUser;
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
-        // redux store
+
         console.log("user", user, "idTokenResult", idTokenResult);
 
         createOrUpdateUser(idTokenResult.token)
@@ -61,7 +60,7 @@ const RegisterComplete = ({ history }) => {
           })
           .catch((err) => console.log(err));
 
-        // redirect
+
         history.push("/");
       }
     } catch (error) {

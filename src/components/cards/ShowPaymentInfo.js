@@ -11,17 +11,6 @@ const ShowPaymentInfo = ({ order, showStatus = true }) => (
       <br />
       <span>
 
-        {/* {order.paymentIntent.status === "Cash On Delivery" ?
-          (order.paymentIntent.amount).toLocaleString("en-US", {
-            style: "currency",
-            currency: "php",
-          })
-          : (order.paymentIntent.amount /= 100).toLocaleString("en-US", {
-            style: "currency",
-            currency: "php",
-          })
-        } */}
-
         Amount:{" / "}
         {(order.paymentIntent.amount).toLocaleString("en-US", {
           style: "currency",

@@ -13,7 +13,7 @@ const Login = ({ history }) => {
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
-  const oneSpace = '\xa0'; //spacing for the register link
+  const oneSpace = '\xa0';
 
   useEffect(() => {
     let intended = history.location.state;
@@ -38,10 +38,10 @@ const Login = ({ history }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // console.table(email, password);
+
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
-      // console.log(result.user.photoURL);
+
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
 
@@ -61,7 +61,7 @@ const Login = ({ history }) => {
         })
         .catch((err) => console.log(err));
 
-      // history.push("/");
+
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -90,7 +90,7 @@ const Login = ({ history }) => {
             roleBasedRedirect(res);
           })
           .catch((err) => console.log(err));
-        // history.push("/");
+
       })
       .catch((err) => {
         console.log(err);

@@ -12,7 +12,6 @@ const ProductCreateForm = ({
   subOptions,
   showSub,
 }) => {
-  // destructure
   const {
     title,
     description,

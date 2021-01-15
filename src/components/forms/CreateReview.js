@@ -1,7 +1,6 @@
 import React from "react";
 
 const CreateReview = ({ setReview, review, handleAddReview }) => {
-  // console.log(review)
 
   return (
     <div className="forms">

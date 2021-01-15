@@ -24,7 +24,7 @@ const initialState = {
 };
 
 const ProductUpdate = ({ match, history }) => {
-  // state
+
   const [values, setValues] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [subOptions, setSubOptions] = useState([]);
@@ -33,25 +33,24 @@ const ProductUpdate = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
-  // router
+
   const { slug } = match.params;
 
   useEffect(() => {
     loadProduct();
     loadCategories();
-    // eslint-disable-next-line
+
   }, []);
 
   const loadProduct = () => {
     getProduct(slug).then((p) => {
-      // console.log("single product", p);
-      // 1 load single proudct
+
       setValues({ ...values, ...p.data });
-      // 2 load single product category subs
+
       getCategorySubs(p.data.category._id).then((res) => {
-        setSubOptions(res.data); // on first load, show default subs
+        setSubOptions(res.data);
       });
-      // 3 prepare array of sub ids to show as default sub values in antd Select
+
       let arr = [];
       p.data.subs.map((s) => {
         arr.push(s._id)
@@ -59,7 +58,7 @@ const ProductUpdate = ({ match, history }) => {
       });
       console.log("ARR", arr);
       setArrayOfSubs((prev) => arr)
-      return null; // required for ant design select to work
+      return null;
     });
   };
 
@@ -91,7 +90,7 @@ const ProductUpdate = ({ match, history }) => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    // console.log(e.target.name, " ----- ", e.target.value);
+
   };
 
   const handleCategoryChange = (e) => {
@@ -108,12 +107,11 @@ const ProductUpdate = ({ match, history }) => {
 
     console.log("EXISTING CATEGORY values.category", values.category);
 
-    // if user clicks back to the original category
-    // show its sub categories in default
+
     if (values.category._id === e.target.value) {
       loadProduct();
     }
-    // clear old sub category ids
+
     setArrayOfSubs([]);
   };
 
@@ -131,7 +129,7 @@ const ProductUpdate = ({ match, history }) => {
               <h4>Product update</h4>
             )}
 
-          {/* {JSON.stringify(values)} */}
+
 
           <div className="p-3">
             <FileUpload

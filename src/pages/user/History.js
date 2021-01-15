@@ -15,16 +15,16 @@ const History = () => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
 
-  // eslint-disable-next-line
+
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false); //fix for react-pdf error
 
   const { user } = useSelector((state) => ({ ...state }));
 
-  //get the oldest date ordered
+
   const oldestOrder = orders && orders.map(function (e) { return e.createdAt; }).sort()[0]
 
-  //oldest order and completed status
+
   const completedOrder = orders && orders.find(
     orderCompleted => orderCompleted.createdAt === oldestOrder && orderCompleted.orderStatus === "Completed"
   );
@@ -33,8 +33,7 @@ const History = () => {
 
   let dispatch = useDispatch();
 
-  //fix for react-pdf error
-  // eslint-disable-next-line
+
   useEffect(() => {
     setOpen(false)
     setOpen(true);
@@ -47,7 +46,7 @@ const History = () => {
       loadUsersOrders();
     }
     return () => { isMounted = false };
-    // eslint-disable-next-line
+
   }, []);
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const History = () => {
       loadUsersCart();
     }
     return () => { isMounted = false };
-    // eslint-disable-next-line
+
   }, []);
 
   useEffect(() => {
@@ -66,13 +65,13 @@ const History = () => {
       }
     }, 2000);
     return () => clearTimeout(delayed);
-    // eslint-disable-next-line
+
   }, [products]);
 
   const loadUsersOrders = () => {
     getUserOrders(user.token).then((res) => {
       setOrders(res.data);
-      // console.log(JSON.stringify(res.data, null, 4));
+
       setLoading(false);
     });
   }
@@ -80,7 +79,7 @@ const History = () => {
   const loadUsersCart = () => {
     getUserCart(user.token).then((res) => {
       setProducts(res.data.products);
-      // console.log(p)
+
       setLoading(false);
     })
       .catch(error => {
@@ -89,24 +88,22 @@ const History = () => {
   };
 
   const handleGetCart = () => {
-    // create cart array
-    // eslint-disable-next-line
+
     let cart = [];
     if (typeof window !== "undefined") {
-      // if cart is in local storage GET it
+
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
       }
-      // retrieve saved cart // add to redux state
+
       if (products) {
         dispatch({
           type: "ADD_TO_CART",
           payload: products
         });
-        // remove duplicates
+
         let unique = _.uniqWith(products, _.isEqual);
-        // save to local storage
-        // console.log('unique', unique)
+
         localStorage.setItem("cart", JSON.stringify(unique))
       };
     }
@@ -148,7 +145,7 @@ const History = () => {
     </table>
   );
 
-  //react-pdf error fixed
+
   const showDownloadLink = (order) => {
     return (
       <>

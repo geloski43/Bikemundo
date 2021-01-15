@@ -13,12 +13,12 @@ const Wishlist = () => {
     let isMounted = true;
     if (isMounted) loadWishlist();
     return () => { isMounted = false };
-    // eslint-disable-next-line
+
   }, []);
 
   const loadWishlist = () =>
     getWishlist(user.token).then((res) => {
-      // console.log(res);
+
       setWishlist(res.data.wishlist);
     });
 

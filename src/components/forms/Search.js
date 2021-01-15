@@ -10,13 +10,7 @@ const Search = () => {
 
   const history = useHistory();
 
-  // const handleChange = (e) => {
-  //   dispatch({
-  //     type: "SEARCH_QUERY",
-  //     payload: { text: e.target.value },
-  //   })
-  //   console.log(text)
-  // };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

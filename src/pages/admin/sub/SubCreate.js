@@ -32,11 +32,11 @@ const SubCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name);
+
     setLoading(true);
     createSub({ name, parent: category }, user.token)
       .then((res) => {
-        // console.log(res)
+
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
@@ -50,8 +50,7 @@ const SubCreate = () => {
   };
 
   const handleRemove = async (slug) => {
-    // let answer = window.confirm("Delete?");
-    // console.log(answer, slug);
+
     if (window.confirm("Delete?")) {
       setLoading(true);
       removeSub(slug, user.token)
@@ -69,7 +68,7 @@ const SubCreate = () => {
     }
   };
 
-  // step 4
+
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
@@ -108,10 +107,10 @@ const SubCreate = () => {
             setName={setName}
           />
 
-          {/* step 2 and step 3 */}
+
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
 
-          {/* step 5 */}
+
           {subs.filter(searched(keyword)).map((s) => (
             <div className="alert alert-secondary" key={s._id}>
               {s.name}

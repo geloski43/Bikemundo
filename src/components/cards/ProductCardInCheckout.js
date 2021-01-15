@@ -32,7 +32,7 @@ const ProductCardInCheckout = ({ p }) => {
         return null
       });
 
-      //  console.log('cart udpate color', cart)
+
       localStorage.setItem("cart", JSON.stringify(cart));
       dispatch({
         type: "ADD_TO_CART",
@@ -42,7 +42,7 @@ const ProductCardInCheckout = ({ p }) => {
   };
 
   const handleQuantityChange = (e) => {
-    // console.log("available quantity", p.quantity);
+
     let count = e.target.value < 1 ? 1 : e.target.value;
 
     if (count > p.quantity) {
@@ -73,7 +73,7 @@ const ProductCardInCheckout = ({ p }) => {
   };
 
   const handleRemove = () => {
-    // console.log(p._id, "to remove");
+
     let cart = [];
     if (!user && typeof window !== "undefined") {
       if (localStorage.getItem("cart")) {
@@ -95,7 +95,7 @@ const ProductCardInCheckout = ({ p }) => {
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
       }
-      // [1,2,3,4,5]
+
       cart.map((product, i) => {
         if (product._id === p._id) {
           cart.splice(i, 1);

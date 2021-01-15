@@ -17,15 +17,15 @@ const BestSellers = () => {
       setLoading(false);
     });
     return () => { isMounted = false };
-    // eslint-disable-next-line
+
   }, [page]);
 
   useEffect(() => {
-    let isMounted = true; // note this flag denote mount status
+    let isMounted = true;
     getProductsCount().then(res => {
       if (isMounted) setProductsCount(res.data);
     })
-    return () => { isMounted = false }; // use effect cleanup to set flag false, if unmounted
+    return () => { isMounted = false };
   }, []);
 
   return (

@@ -18,7 +18,6 @@ const CategoryCreate = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  // step 1
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -30,11 +29,9 @@ const CategoryCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name);
     setLoading(true);
     createCategory({ name }, user.token)
       .then((res) => {
-        // console.log(res)
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
@@ -48,8 +45,7 @@ const CategoryCreate = () => {
   };
 
   const handleRemove = async (slug) => {
-    // let answer = window.confirm("Delete?");
-    // console.log(answer, slug);
+
     if (window.confirm("Delete?")) {
       setLoading(true);
       removeCategory(slug, user.token)
@@ -67,7 +63,6 @@ const CategoryCreate = () => {
     }
   };
 
-  // step 4
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
@@ -89,10 +84,8 @@ const CategoryCreate = () => {
             setName={setName}
           />
 
-          {/* step 2 and step 3 */}
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
 
-          {/* step 5 */}
           {categories.filter(searched(keyword)).map((c) => (
             <div className="alert alert-secondary" key={c._id}>
               {c.name}

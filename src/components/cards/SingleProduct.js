@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Card, Tabs, Tooltip } from "antd";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
@@ -19,56 +18,42 @@ import ReviewCard from "../../components/cards/ReviewCard";
 
 const { TabPane } = Tabs;
 
-// this is childrend component of Product page
 const SingleProduct = ({ product, onStarClick, star, handleAddReview, setReview, review }) => {
   const [tooltip, setTooltip] = useState("Click to add");
 
-  // redux
-  // eslint-disable-next-line
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
-  // router
   let history = useHistory();
 
   const { title, images, description, _id } = product;
 
   const handleAddToCart = () => {
-    // create cart array
     let cart = [];
     if (typeof window !== "undefined") {
-      // if cart is in local storage GET it
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
       }
-      //find the same product saved on users cart
       const existingCartItem = cart.find(
         cartItem => cartItem._id === product._id
       );
-      //if id matched do nothing
       if (existingCartItem) {
         toast.warning("Item already added in cart");
         return;
       }
-      // push new product to cart
       if (!existingCartItem) {
         cart.push({
           ...product,
           count: 1,
         });
-        // remove duplicates
         let unique = _.uniqWith(cart, _.isEqual);
-        // save to local storage
         console.log('unique', unique)
         localStorage.setItem("cart", JSON.stringify(unique));
-        // show tooltip
         setTooltip("Added");
 
-        // add to redux state
         dispatch({
           type: "ADD_TO_CART",
           payload: unique,
         });
-        // show cart items in side drawer
         dispatch({
           type: "SET_VISIBLE",
           payload: true,

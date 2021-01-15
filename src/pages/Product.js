@@ -11,14 +11,14 @@ const Product = ({ match }) => {
   const [star, setStar] = useState(0);
   const [review, setReview] = useState("");
 
-  // redux
+
   const { user } = useSelector((state) => ({ ...state }));
 
   const { slug } = match.params;
 
   useEffect(() => {
     loadSingleProduct();
-    // eslint-disable-next-line
+
   }, [slug]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Product = ({ match }) => {
       let existingRatingObject = product.ratings.find(
         (ele) => ele.postedBy.toString() === user._id.toString()
       );
-      existingRatingObject && setStar(existingRatingObject.star); // current user's star
+      existingRatingObject && setStar(existingRatingObject.star);
     }
   }, [product.ratings, user]);
 
@@ -34,7 +34,7 @@ const Product = ({ match }) => {
     e.preventDefault();
     productReview(product._id, review, user.token).then((res) => {
       console.log("review", res.data);
-      loadSingleProduct(); // if you want to show updated review in real time
+      loadSingleProduct();
     })
       .catch((err) => console.log("Add review error", err));
   };
@@ -42,7 +42,7 @@ const Product = ({ match }) => {
   const loadSingleProduct = () => {
     getProduct(slug).then((res) => {
       setProduct(res.data);
-      // load related
+
       getRelated(res.data._id).then((res) => setRelated(res.data));
     });
   };
@@ -52,7 +52,7 @@ const Product = ({ match }) => {
     console.table(newRating, name);
     productStar(name, newRating, user.token).then((res) => {
       console.log("rating clicked", res.data);
-      loadSingleProduct(); // if you want to show updated rating in real time
+      loadSingleProduct();
     });
   };
 

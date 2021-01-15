@@ -14,7 +14,7 @@ const Register = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("ENV --->", process.env.REACT_APP_REGISTER_REDIRECT_URL);
+
     const config = {
       url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
@@ -24,9 +24,9 @@ const Register = ({ history }) => {
     toast.success(
       `Email is sent to ${email}. Click the link to complete your registration.`
     );
-    // save user email in local storage
+
     window.localStorage.setItem("emailForRegistration", email);
-    // clear state
+
     setEmail("");
   };
 
