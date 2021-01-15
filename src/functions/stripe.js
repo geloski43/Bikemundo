@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const createPaymentIntent = (authtoken, coupon) =>
   axios.post(
-    `${process.env.REACT_APP_API}/create-payment-intent`,
+    "https://guarded-everglades-60016.herokuapp.com/api/create-payment-intent",
     { couponApplied: coupon },
     {
       headers: {

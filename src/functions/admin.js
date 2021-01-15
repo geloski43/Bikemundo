@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getOrders = async (authtoken) =>
-  await axios.get(`${process.env.REACT_APP_API}/admin/orders`, {
+  await axios.get("https://guarded-everglades-60016.herokuapp.com/api/admin/orders", {
     headers: {
       authtoken,
     },
@@ -9,7 +9,7 @@ export const getOrders = async (authtoken) =>
 
 export const changeStatus = async (orderId, orderStatus, authtoken) =>
   await axios.put(
-    `${process.env.REACT_APP_API}/admin/order-status`,
+    "https://guarded-everglades-60016.herokuapp.com/api/admin/order-status",
     { orderId, orderStatus },
     {
       headers: {

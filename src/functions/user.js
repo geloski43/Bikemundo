@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const userCart = async (cart, authtoken) =>
   await axios.post(
-    `${process.env.REACT_APP_API}/user/cart`,
+    "https://guarded-everglades-60016.herokuapp.com/api/user/cart",
     { cart },
     {
       headers: {
@@ -12,14 +12,14 @@ export const userCart = async (cart, authtoken) =>
   );
 
 export const getUserCart = async (authtoken) =>
-  await axios.get(`${process.env.REACT_APP_API}/user/cart`, {
+  await axios.get("https://guarded-everglades-60016.herokuapp.com/api/user/cart", {
     headers: {
       authtoken,
     },
   });
 
 export const emptyUserCart = async (authtoken) =>
-  await axios.delete(`${process.env.REACT_APP_API}/user/cart`, {
+  await axios.delete("https://guarded-everglades-60016.herokuapp.com/api/user/cart", {
     headers: {
       authtoken,
     },
@@ -27,7 +27,7 @@ export const emptyUserCart = async (authtoken) =>
 
 export const saveUserInfo = async (authtoken, address, username, phonenumber) =>
   await axios.put(
-    `${process.env.REACT_APP_API}/user/shipping`,
+    "https://guarded-everglades-60016.herokuapp.com/api/user/shipping",
     { address, username, phonenumber },
     {
       headers: {
@@ -38,7 +38,7 @@ export const saveUserInfo = async (authtoken, address, username, phonenumber) =>
 
 export const applyCoupon = async (authtoken, coupon) =>
   await axios.post(
-    `${process.env.REACT_APP_API}/user/cart/coupon`,
+    "https://guarded-everglades-60016.herokuapp.com/api/user/cart/coupon",
     { coupon },
     {
       headers: {
@@ -49,7 +49,7 @@ export const applyCoupon = async (authtoken, coupon) =>
 
 export const createOrder = async (stripeResponse, authtoken) =>
   await axios.post(
-    `${process.env.REACT_APP_API}/user/order`,
+    "https://guarded-everglades-60016.herokuapp.com/api/user/order",
     { stripeResponse },
     {
       headers: {
@@ -59,21 +59,21 @@ export const createOrder = async (stripeResponse, authtoken) =>
   );
 
 export const getUserOrders = async (authtoken) =>
-  await axios.get(`${process.env.REACT_APP_API}/user/orders`, {
+  await axios.get("https://guarded-everglades-60016.herokuapp.com/api/user/orders", {
     headers: {
       authtoken,
     },
   });
 
 export const deleteUserOrders = async (authtoken) =>
-  await axios.delete(`${process.env.REACT_APP_API}/user/orders`, {
+  await axios.delete("https://guarded-everglades-60016.herokuapp.com/api/user/orders", {
     headers: {
       authtoken,
     },
   });
 
 export const getWishlist = async (authtoken) =>
-  await axios.get(`${process.env.REACT_APP_API}/user/wishlist`, {
+  await axios.get("https://guarded-everglades-60016.herokuapp.com/api/user/wishlist", {
     headers: {
       authtoken,
     },
@@ -81,7 +81,7 @@ export const getWishlist = async (authtoken) =>
 
 export const removeWishlist = async (productId, authtoken) =>
   await axios.put(
-    `${process.env.REACT_APP_API}/user/wishlist/${productId}`,
+    `https://guarded-everglades-60016.herokuapp.com/api/user/wishlist/${productId}`,
     {},
     {
       headers: {
@@ -92,7 +92,7 @@ export const removeWishlist = async (productId, authtoken) =>
 
 export const addToWishlist = async (productId, authtoken) =>
   await axios.post(
-    `${process.env.REACT_APP_API}/user/wishlist`,
+    "https://guarded-everglades-60016.herokuapp.com/api/user/wishlist",
     { productId },
     {
       headers: {
@@ -108,7 +108,7 @@ export const createCashOrderForUser = async (
   couponTrueOrFalse
 ) =>
   await axios.post(
-    `${process.env.REACT_APP_API}/user/cash-order`,
+    " https://guarded-everglades-60016.herokuapp.com/api/user/cash-order",
     { couponApplied: couponTrueOrFalse, COD },
     {
       headers: {
