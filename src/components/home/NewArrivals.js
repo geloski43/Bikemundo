@@ -15,7 +15,8 @@ const NewArrivals = () => {
     getProducts("createdAt", "desc", page).then((res) => {
       if (isMounted) setProducts(res.data);
       setLoading(false);
-    });
+    })
+      .catch((err) => console.log(err));
     return () => { isMounted = false };
     // eslint-disable-next-line
   }, [page]);

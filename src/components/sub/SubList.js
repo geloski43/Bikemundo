@@ -11,7 +11,8 @@ const SubList = () => {
     getSubs().then((res) => {
       if (isMounted) setSubs(res.data);
       setLoading(false);
-    });
+    })
+      .catch((err) => console.log(err));
     return () => { isMounted = false };
     // eslint-disable-next-line
   }, []);

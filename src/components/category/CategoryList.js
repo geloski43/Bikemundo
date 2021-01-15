@@ -11,8 +11,10 @@ const CategoryList = () => {
     getCategories().then((c) => {
       if (isMounted) setCategories(c.data);
       setLoading(false);
-    });
+    })
+      .catch((err) => console.log(err));
     return () => { isMounted = false };
+
     // eslint-disable-next-line
   }, []);
 
