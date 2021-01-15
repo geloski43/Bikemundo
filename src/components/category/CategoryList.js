@@ -19,7 +19,7 @@ const CategoryList = () => {
   }, []);
 
   const showCategories = () =>
-    categories.map((c) => (
+    categories && categories.map((c) => (
       <div
         key={c._id}
         className="categorybutton col btn btn-outlined-primary btn-md btn-block btn-raised m-3"

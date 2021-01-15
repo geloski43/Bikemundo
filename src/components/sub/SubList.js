@@ -18,7 +18,7 @@ const SubList = () => {
   }, []);
 
   const showSubs = () =>
-    subs.map((s) => (
+    subs && subs.map((s) => (
       <div
         key={s._id}
         className="subbutton col btn btn-outlined-primary btn-sm btn-block btn-raised m-3"
