@@ -1,6 +1,6 @@
 import React from "react";
 import ModalImage from "react-modal-image";
-import bikemundo from "../../images/bikemundo.jpg";
+import altlogo from "../../images/altlogo.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { userCart } from "../../functions/user"
@@ -124,7 +124,7 @@ const ProductCardInCheckout = ({ p }) => {
             {p.images.length ? (
               <ModalImage small={p.images[0].url} large={p.images[0].url} />
             ) : (
-                <ModalImage small={bikemundo} large={bikemundo} />
+                <ModalImage small={altlogo} large={altlogo} />
               )}
           </div>
         </td>

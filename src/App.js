@@ -7,7 +7,7 @@ import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import { currentUser } from "./functions/auth";
 import { LoadingOutlined } from "@ant-design/icons";
-import bikemundo from './images/bikemundo.jpg'
+import altloading from './images/altloading.jpg'
 
 
 const Login = lazy(() => import("./pages/auth/Login"));
@@ -80,7 +80,7 @@ const App = () => {
       fallback={
         <div className="col text-center p-5">
           <div className="justify-content-md-center" >
-            <img src={bikemundo} alt="" />
+            <img src={altloading} alt="" />
           </div>
           <LoadingOutlined />{oneSpace}
           {oneSpace}<LoadingOutlined />

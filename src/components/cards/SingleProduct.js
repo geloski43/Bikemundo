@@ -3,7 +3,7 @@ import { Card, Tabs, Tooltip } from "antd";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import bikemundo from "../../images/bikemundo.jpg";
+import altlogo from "../../images/altlogo.jpg";
 import ProductListItems from "./ProductListItems";
 import StarRating from "react-star-ratings";
 import RatingModal from "../modal/RatingModal";
@@ -79,7 +79,7 @@ const SingleProduct = ({ product, onStarClick, star, handleAddReview, setReview,
             {images && images.map((i) => <img src={i.url} key={i.public_id} alt="" />)}
           </Carousel>
         ) : (
-            <Card cover={<img src={bikemundo} className="mb-3 card-image" alt="" />}></Card>
+            <Card cover={<img src={altlogo} className="mb-3 card-image" alt="" />}></Card>
           )}
 
         <Tabs type="card">

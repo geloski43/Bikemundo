@@ -2,7 +2,7 @@ import React from "react";
 import { Drawer } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import bikemundo from "../../images/bikemundo.jpg";
+import altlogo from "../../images/altlogo.jpg";
 
 const SideDrawer = () => {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const SideDrawer = () => {
                 </>
               ) : (
                   <>
-                    <img src={bikemundo} style={imageStyle} alt="" />
+                    <img src={altlogo} style={imageStyle} alt="" />
                     <p className="text-center bg-secondary text-light">
                       {p.title} x {p.count}
                     </p>
