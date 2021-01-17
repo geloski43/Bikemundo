@@ -101,7 +101,7 @@ const CompletedOrder = ({ handleRemoveOrder, onReject, orders, showStatus = true
               </tbody>
             </table>
             <Popconfirm
-              title={`Are you sure to delete this order with Id of ${completedOrder._id}, ordered on ${new Date(completedOrder.createdAt).toLocaleDateString()}?`}
+              title={`Are you sure to delete this order with Id of ${completedOrder.paymentIntent.id ? completedOrder.paymentIntent.id : completedOrder._id}, ordered on ${new Date(completedOrder.createdAt).toLocaleDateString()}?`}
               onConfirm={handleRemoveOrder}
               onCancel={onReject}
               okText="Delete"
