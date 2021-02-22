@@ -48,7 +48,7 @@ const Header = () => {
     },
     {
       email:
-        "onath.gonzales@gmail.com ",
+        "onath.gonzales@gmail.com",
     },
   ];
 
