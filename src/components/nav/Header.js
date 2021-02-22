@@ -32,7 +32,7 @@ const Header = () => {
   const adminEmails = [
     {
       email:
-        "ajgonzales43@gmail.com"
+        "onath.gonzales@gmail.com"
     },
     {
       email:
@@ -40,15 +40,15 @@ const Header = () => {
     },
     {
       email:
-        "jovieangel34@gmail.com",
+        "jovieangel34@gmail.com"
     },
     {
       email:
-        "bikemundomail@gmail.com",
+        "bikemundomail@gmail.com"
     },
     {
       email:
-        "onath.gonzales@gmail.com",
+        "ajgonzales43@gmail.com"
     },
   ];
 
