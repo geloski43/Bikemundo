@@ -27,8 +27,7 @@ const CategoryCreate = () => {
   const loadCategories = () =>
     getCategories().then((c) => setCategories(c.data));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     setLoading(true);
     createCategory({ name }, user.token)
       .then((res) => {
@@ -72,12 +71,7 @@ const CategoryCreate = () => {
           <AdminNav />
         </div>
         <div className="col">
-          {loading ? (
-            <h4 className="text-danger">Loading..</h4>
-          ) : (
-              <h4>Create category</h4>
-            )}
-
+          <h4 className="mt-3">Create Category</h4>
           <CategoryForm
             handleSubmit={handleSubmit}
             name={name}
@@ -85,6 +79,12 @@ const CategoryCreate = () => {
           />
 
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+
+          {loading ? (
+            <h4 className="text-danger">Loading..</h4>
+          ) : (
+              <h6>Categories</h6>
+            )}
 
           {categories.filter(searched(keyword)).map((c) => (
             <div className="alert alert-secondary" key={c._id}>

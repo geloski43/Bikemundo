@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Badge, Avatar, Switch, Affix } from "antd";
+import { Menu, Badge, Avatar, Affix } from "antd";
 import {
   SettingOutlined,
   UserOutlined,
@@ -65,10 +65,6 @@ const Header = () => {
   const handleClick = (e) => {
 
     setCurrent(e.key);
-  };
-
-  const changeTheme = value => {
-    setTheme(value ? 'dark' : 'light');
   };
 
   const logoutSaveAndEmptyCart = () => {
@@ -196,7 +192,6 @@ const Header = () => {
 
           {user && (
             <Item className="float-right">
-              <Switch onChange={changeTheme} />
             </Item>
           )}
         </Menu>

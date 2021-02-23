@@ -4,6 +4,7 @@ import SingleProduct from "../components/cards/SingleProduct";
 import { useSelector } from "react-redux";
 import ProductCard from "../components/cards/ProductCard";
 import FoooterLinks from "../components/nav/FooterLinks";
+import { toast } from "react-toastify";
 
 const Product = ({ match }) => {
   const [product, setProduct] = useState({});
@@ -34,7 +35,7 @@ const Product = ({ match }) => {
     e.preventDefault();
     productReview(product._id, review, user.token).then((res) => {
       console.log("review", res.data);
-      loadSingleProduct();
+      toast.success("Review has been added")
     })
       .catch((err) => console.log("Add review error", err));
   };
@@ -42,7 +43,6 @@ const Product = ({ match }) => {
   const loadSingleProduct = () => {
     getProduct(slug).then((res) => {
       setProduct(res.data);
-
       getRelated(res.data._id).then((res) => setRelated(res.data));
     });
   };

@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../../functions/category";
 import { updateSub, getSub } from "../../../functions/sub";
-import CategoryForm from "../../../components/forms/CategoryForm";
+import Select from 'react-select'
+// import chroma from "chroma-js";
 
 const SubUpdate = ({ match, history }) => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -14,10 +15,24 @@ const SubUpdate = ({ match, history }) => {
   const [categories, setCategories] = useState([]);
   const [parent, setParent] = useState("");
 
+
+  // const colourStyles = {
+  //   control: styles => ({ ...styles, backgroundColor: 'white' }),
+  //   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+  //     const color = new chroma(data.color);
+  //     return {
+  //       ...styles,
+  //       backgroundColor: isDisabled ? 'red' : 'blue',
+  //       color: '#FFF',
+  //       cursor: isDisabled ? 'not-allowed' : 'default',
+  //     }
+  //   }
+  // };
+
+
   useEffect(() => {
     loadCategories();
     loadSub();
-
   }, []);
 
   const loadCategories = () =>
@@ -25,8 +40,8 @@ const SubUpdate = ({ match, history }) => {
 
   const loadSub = () =>
     getSub(match.params.slug).then((s) => {
-      setName(s.data.name);
-      setParent(s.data.parent);
+      setName(s.data.sub.name);
+      setParent(s.data.sub.parent);
     });
 
   const handleSubmit = (e) => {
@@ -48,6 +63,19 @@ const SubUpdate = ({ match, history }) => {
       });
   };
 
+
+  let existingParent = parent && categories && categories.find(
+    selectedParent => (
+      selectedParent._id === parent
+    )
+  );
+
+  const options = categories.length > 0 &&
+    categories.map(c => ({
+      "value": c._id,
+      "label": c.name
+    }))
+
   return (
     <div className="forms container-fluid">
       <div className="row">
@@ -62,27 +90,47 @@ const SubUpdate = ({ match, history }) => {
             )}
 
           <div className="form-group">
-            <label>Parent category</label>
-            <select
+            <span>Update Parent category</span>
+
+            <Select
+              placeholder={existingParent.name}
+              onChange={(options) => setParent(options.value)}
+              options={options}
+            />
+
+            {/* <select
               name="category"
               className="form-control"
               onChange={(e) => setParent(e.target.value)}
             >
-              <option>Please select</option>
+
+              <option >{existingParent.name}</option>
               {categories.length > 0 &&
                 categories.map((c) => (
                   <option key={c._id} value={c._id} defaultValue={c._id === parent}>
                     {c.name}
                   </option>
                 ))}
-            </select>
+            </select> */}
+
           </div>
 
-          <CategoryForm
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-          />
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                className="form-control"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                autoFocus
+                required
+              />
+              <br />
+              <button className="btn btn-outline-primary">Save</button>
+            </div>
+          </form>
+
         </div>
       </div>
     </div>

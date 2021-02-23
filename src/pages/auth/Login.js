@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { auth, googleAuthProvider } from "../../firebase";
+import { auth, googleAuthProvider, facebookProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
-import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
+import { MailOutlined, GoogleOutlined, FacebookOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
@@ -14,6 +14,7 @@ const Login = ({ history }) => {
 
   const { user } = useSelector((state) => ({ ...state }));
   const oneSpace = '\xa0';
+
 
   useEffect(() => {
     let intended = history.location.state;
@@ -69,6 +70,40 @@ const Login = ({ history }) => {
     }
   };
 
+  const facebookLogin = async () => {
+    auth
+      .signInWithPopup(facebookProvider)
+      .then(async (result) => {
+        const { user } = result;
+        const idTokenResult = await user.getIdTokenResult();
+        createOrUpdateUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                picture: res.data.picture,
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                _id: res.data._id,
+              },
+            });
+            roleBasedRedirect(res);
+          })
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential;
+
+        // ...
+      });
+  }
+
   const googleLogin = async () => {
     auth
       .signInWithPopup(googleAuthProvider)
@@ -89,8 +124,6 @@ const Login = ({ history }) => {
             });
             roleBasedRedirect(res);
           })
-          .catch((err) => console.log(err));
-
       })
       .catch((err) => {
         console.log(err);
@@ -171,6 +204,17 @@ const Login = ({ history }) => {
             size="medium"
           >
             Google account Login and Register
+          </Button>
+          <Button
+            onClick={facebookLogin}
+            type="primary"
+            className="mb-3"
+            block
+            shape="round"
+            icon={<FacebookOutlined />}
+            size="medium"
+          >
+            Facebook account Login and Register
           </Button>
         </div>
       </div>

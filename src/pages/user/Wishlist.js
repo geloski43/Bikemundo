@@ -18,7 +18,7 @@ const Wishlist = () => {
 
   const loadWishlist = () =>
     getWishlist(user.token).then((res) => {
-
+      console.log(res.data.wishlist.length);
       setWishlist(res.data.wishlist);
     });
 
@@ -34,21 +34,23 @@ const Wishlist = () => {
           <UserNav />
         </div>
 
-        {wishlist.lenght >= 1 ? <div className="col">
-          <h4>Wishlist</h4>
-          {wishlist.map((p) => (
-            <div key={p._id} className="alert alert-secondary">
-              <Link to={`/product/${p.slug}`}>{p.title}</Link>
-              <span
-                onClick={() => handleRemove(p._id)}
-                className="btn btn-sm float-right"
-              >
-                <DeleteOutlined className="text-danger" />
-              </span>
-            </div>
-          ))}
-        </div>
-          : <h4>No Wishlist added</h4>
+        {wishlist.length !== 0 ? (
+          <div className="col">
+            <h4>Wishlist</h4>
+            {wishlist.map((p) => (
+              <div key={p._id} className="alert alert-secondary">
+                <Link to={`/product/${p.slug}`}>{p.title}</Link>
+                <span
+                  onClick={() => handleRemove(p._id)}
+                  className="btn btn-sm float-right"
+                >
+                  <DeleteOutlined className="text-danger" />
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+            <h4>No Wishlist added</h4>)
         }
 
       </div>

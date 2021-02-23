@@ -12,11 +12,15 @@ const CategoryUpdate = ({ history, match }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(name)
     loadCategory();
-  }, []);
+  }, [loading]);
 
   const loadCategory = () =>
-    getCategory(match.params.slug).then((c) => setName(c.data.name));
+    getCategory(match.params.slug).then((c) => {
+      setName(c.data.category.name);
+      console.log(c.data.category.name);
+    });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,11 +52,21 @@ const CategoryUpdate = ({ history, match }) => {
               <h4>Update category</h4>
             )}
 
-          <CategoryForm
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-          />
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                className="form-control"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                autoFocus
+                required
+              />
+              <br />
+              <button className="btn btn-outline-primary">Save</button>
+            </div>
+          </form>
 
           <hr />
         </div>

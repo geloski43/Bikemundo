@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
+import Select from 'react-select'
+
 
 const SubCreate = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -30,8 +32,7 @@ const SubCreate = () => {
 
   const loadSubs = () => getSubs().then((s) => setSubs(s.data));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
 
     setLoading(true);
     createSub({ name, parent: category }, user.token)
@@ -68,6 +69,18 @@ const SubCreate = () => {
     }
   };
 
+  let existingParent = category && categories && categories.find(
+    selectedParent => (
+      selectedParent._id === category
+    )
+  );
+
+  const options = categories.length > 0 &&
+    categories.map(c => ({
+      "value": c._id,
+      "label": c.name
+    }))
+
 
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
@@ -78,28 +91,13 @@ const SubCreate = () => {
           <AdminNav />
         </div>
         <div className="col">
-          {loading ? (
-            <h4 className="text-danger">Loading..</h4>
-          ) : (
-              <h4>Create sub category</h4>
-            )}
+          <h4 className="mt-3">Create sub category</h4>
 
-          <div className="form-group">
-            <label>Parent category</label>
-            <select
-              name="category"
-              className="form-control"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option>Please select</option>
-              {categories.length > 0 &&
-                categories.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-            </select>
-          </div>
+          <Select
+            placeholder="Select Parent Category"
+            onChange={(options) => setCategory(options.value)}
+            options={options}
+          />
 
           <CategoryForm
             handleSubmit={handleSubmit}
@@ -107,8 +105,13 @@ const SubCreate = () => {
             setName={setName}
           />
 
-
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+
+          {loading ? (
+            <h4 className="text-danger">Loading..</h4>
+          ) : (
+              <h6>Sub-Categories</h6>
+            )}
 
 
           {subs.filter(searched(keyword)).map((s) => (
