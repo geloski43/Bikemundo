@@ -63,7 +63,7 @@ const History = () => {
       if (products) {
         handleGetCart();
       }
-    }, 2000);
+    });
     return () => clearTimeout(delayed);
 
   }, [products]);
