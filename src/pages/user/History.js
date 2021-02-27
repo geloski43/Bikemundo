@@ -9,11 +9,13 @@ import Invoice from "../../components/order/Invoice";
 import _ from "lodash";
 import CompletedOrder from "../../components/cards/CompletedOrder";
 import { message } from 'antd';
+import { toast } from "react-toastify";
 
 
 const History = () => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
+  const [cartOwner, setCartOwner] = useState(false);
 
 
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,6 @@ const History = () => {
 
   let dispatch = useDispatch();
 
-
   useEffect(() => {
     setOpen(false)
     setOpen(true);
@@ -44,14 +45,6 @@ const History = () => {
     let isMounted = true;
     if (isMounted) {
       loadUsersOrders();
-    }
-    return () => { isMounted = false };
-
-  }, []);
-
-  useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
       loadUsersCart();
     }
     return () => { isMounted = false };
@@ -59,28 +52,27 @@ const History = () => {
   }, []);
 
   useEffect(() => {
-    const delayed = setTimeout(() => {
-      if (products) {
-        handleGetCart();
-      }
-    });
-    return () => clearTimeout(delayed);
-
+    if (products && cartOwner) {
+      handleGetCart();
+    } else {
+      return;
+      // console.log("do not render handle get cart again!");
+    }
   }, [products]);
 
   const loadUsersOrders = () => {
     getUserOrders(user.token).then((res) => {
       setOrders(res.data);
-
-      setLoading(false);
     });
   }
 
   const loadUsersCart = () => {
     getUserCart(user.token).then((res) => {
+      // console.log('USER CART', res.data)
+      if (res.data.orderBy === user._id) {
+        setCartOwner(true)
+      }
       setProducts(res.data.products);
-
-      setLoading(false);
     })
       .catch(error => {
         console.log("Users Cart Error", error)

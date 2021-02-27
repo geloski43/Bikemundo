@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Badge, Avatar, Affix } from "antd";
 import {
   SettingOutlined,
@@ -8,6 +8,7 @@ import {
   ShoppingOutlined,
   ShoppingCartOutlined,
   BarsOutlined,
+  ClockCircleOutlined
 } from "@ant-design/icons";
 import { userCart } from "../../functions/user"
 import { Link } from "react-router-dom";
@@ -57,8 +58,6 @@ const Header = () => {
       user && conFirmedEmail.email === user.email
     )
   );
-
-
 
   let history = useHistory();
 

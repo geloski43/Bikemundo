@@ -73,7 +73,6 @@ const ProductCardInCheckout = ({ p }) => {
   };
 
   const handleRemove = () => {
-
     let cart = [];
     if (!user && typeof window !== "undefined") {
       if (localStorage.getItem("cart")) {
